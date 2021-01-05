@@ -16,11 +16,6 @@ class UserInfoController extends BaseController
 
     public function actionSendCapture()
     {
-        $key = 'capture_' . 1111;
-        Yii::$app->redis->set($key);
-        die();
-
-
         $phone = Yii::$app->request->post('phone');
         //校验是否存在
         $user = UserInfo::find()->where(['phone' => $phone])->one();
@@ -31,8 +26,8 @@ class UserInfoController extends BaseController
         $capture = $this->generateCapture();
 
         //将验证码存入redis
-//        $key = 'capture_' . $phone;
-//        Yii::$app->cache->redis->set($key);
+        $key = 'capture_' . $phone;
+        Yii::$app->cache->redis->set($key, $capture);
         $rsp = $this->sendSMS($phone, $capture);
         $this->success($rsp);
 
