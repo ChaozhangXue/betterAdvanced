@@ -16,6 +16,11 @@ class UserInfoController extends BaseController
 
     public function actionSendCapture()
     {
+        $key = 'capture_' . 1111;
+        Yii::$app->cache->redis->set($key);
+        die();
+
+
         $phone = Yii::$app->request->post('phone');
         //校验是否存在
         $user = UserInfo::find()->where(['phone' => $phone])->one();
