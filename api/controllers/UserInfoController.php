@@ -17,7 +17,7 @@ class UserInfoController extends BaseController
     public function actionSendCapture()
     {
         $key = 'capture_' . 1111;
-        Yii::$app->cache->redis->set($key);
+        Yii::$app->redis->set($key);
         die();
 
 
